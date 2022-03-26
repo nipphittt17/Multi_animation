@@ -34,18 +34,6 @@ function draw() {
     image(soda[0], 500, 400, 30, 60);
     image(lemon[0], 150, 600, 40, 50);
 
-    // image(playerImages[frameCount % 7], mouseX, mouseY, 120, 170);
-    //else if (
-    //     eat &&
-    //     mouseX >= 180 &&
-    //     mouseX <= 220 &&
-    //     mouseY >= 300 &&
-    //     mouseY <= 370
-    // ) {
-    //     apple.splice(0, 1);
-    //     image(apple[0], 200, 350, 45, 50);
-    // }
-
     // image(iceCream[0], 350, 550, 35, 70);
     // image(iceCream[0], 580, 80, 35, 70);
     // image(iceCream[0], 650, 160, 35, 70);
@@ -60,15 +48,6 @@ function draw() {
     //     image(iceCream[0], 210, 250);
     // }
 }
-
-// function iceCream() {
-//     this.x = random(0, width);
-//     this.y = random(0, height);
-
-//     this.diaplay = function () {
-//         image(iceCream[0], this.x, this.y);
-//     };
-// }
 
 function savePng() {
     saveButton(canvas, "canvas.png");
@@ -94,7 +73,52 @@ function keyPressed() {
             iceCream.splice(0, 1);
             image(iceCream[0], 100, 200, 40, 80);
         }
+
+        if (
+            // eat &&
+            mouseX >= 120 &&
+            mouseX <= 180 &&
+            mouseY >= 230 &&
+            mouseY <= 370
+        ) {
+            apple.splice(0, 1);
+            image(apple[0], 200, 350, 45, 50);
+        }
+
+        if (
+            // eat &&
+            mouseX >= 220 &&
+            mouseX <= 280 &&
+            mouseY >= -20 &&
+            mouseY <= 120
+        ) {
+            coconut.splice(0, 1);
+            image(coconut[0], 300, 100, 45, 45);
+        }
+
+        if (
+            // eat &&
+            mouseX >= 420 &&
+            mouseX <= 480 &&
+            mouseY >= 280 &&
+            mouseY <= 420
+        ) {
+            soda.splice(0, 1);
+            image(soda[0], 500, 400, 30, 60);
+        }
+
+        if (
+            // eat &&
+            mouseX >= 70 &&
+            mouseX <= 130 &&
+            mouseY >= 480 &&
+            mouseY <= 620
+        ) {
+            lemon.splice(0, 1);
+            image(lemon[0], 150, 600, 40, 50);
+        }
     }
+
     if (keyCode === 39) {
         eat = false;
     }
