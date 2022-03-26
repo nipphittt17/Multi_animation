@@ -23,10 +23,10 @@ function setup() {
 function draw() {
     // put drawing code here
 
-    // ellipse(50, 50, 80, 80);
     // if (!isPause) {
     // imageMode(CENTER);
     background(213, 224, 242);
+    // ellipse(120, 220, 80, 80);
     image(playerImages[frameCount % 7], mouseX, mouseY, 120, 170);
     image(iceCream[0], 100, 200, 40, 80);
     image(apple[0], 200, 350, 45, 50);
@@ -34,16 +34,6 @@ function draw() {
     image(soda[0], 500, 400, 30, 60);
     image(lemon[0], 150, 600, 40, 50);
 
-    if (
-        eat &&
-        mouseX >= 80 &&
-        mouseX <= 120 &&
-        mouseY >= 100 &&
-        mouseY <= 220
-    ) {
-        iceCream.splice(0, 1);
-        image(iceCream[0], 100, 200, 40, 80);
-    }
     // image(playerImages[frameCount % 7], mouseX, mouseY, 120, 170);
     //else if (
     //     eat &&
@@ -93,12 +83,19 @@ function mouseClicked() {
 function keyPressed() {
     if (keyCode === 32) {
         //32=spacebar
-        // background(213, 224, 242);
         eat = true;
+        if (
+            // eat &&
+            mouseX >= 20 &&
+            mouseX <= 80 &&
+            mouseY >= 80 &&
+            mouseY <= 220
+        ) {
+            iceCream.splice(0, 1);
+            image(iceCream[0], 100, 200, 40, 80);
+        }
     }
     if (keyCode === 39) {
-        // x = x + 10;
-        // background(213, 224, 242);
         eat = false;
     }
 }
