@@ -34,7 +34,22 @@ function setup() {
     console.log("canvas is created");
     // saveButton = createButton("Save PNG");
     // saveButton.mousePressed(savePng);
-    frameRate(10);
+    frameRate(20);
+}
+
+/**
+ * @param {Array} imgArr
+ * @param {boolean} alreadyAte
+ * @param {number} posX
+ * @param {number} posY
+ * @param {number} scale
+ */
+const setIMG = (imgArr, alreadyAte,posX, posY, scale) => {
+    if (!alreadyAte) {
+        image(imgArr[0], posX, posY, imgArr[0].width * scale, imgArr[0].height * scale);
+    } else {
+        image(imgArr[1], posX, posY + (imgArr[0].height * scale - imgArr[1].height * scale), imgArr[1].width * scale, imgArr[1].height * scale);
+    }
 }
 
 function draw() {
@@ -43,26 +58,19 @@ function draw() {
     // if (!isPause) {
     // imageMode(CENTER);
     background(213, 224, 242);
-    // ellipse(120, 220, 80, 80);
+    let scaleDown = 0.6;
+    
     image(playerImages[frameCount % 7], mouseX, mouseY, 120, 170);
-    image(iceCream[0], 100, 200, 40, 80);
-    image(apple[0], 200, 350, 45, 50);
-    image(coconut[0], 300, 100, 45, 45);
-    image(soda[0], 500, 400, 30, 60);
-    image(lemon[0], 150, 600, 40, 50);
-    image(pear[0], 350, 550, 40, 60);
-    image(mushroom[0], 580, 80, 40, 60);
-    image(fries[0], 650, 560, 35, 60);
-    image(fish[0], 470, 220, 60, 50);
-    // image(iceCream[0], 570, 600, 35, 70);
-
-    // image(apple, 400, 250);
-    // image(coconut, 550, 240);
-
-    // if (eat && x >= 140) {
-    //     iceCream.splice(0, 1);
-    //     image(iceCream[0], 210, 250);
-    // }
+    setIMG(iceCream, alreadyAte.iceCream, 100, 200, scaleDown);  
+    setIMG(apple, alreadyAte.apple, 200, 350, 0.9);    
+    setIMG(coconut, alreadyAte.coconut, 300, 100, scaleDown);
+    setIMG(soda, alreadyAte.soda, 500, 400, scaleDown);    
+    setIMG(lemon, alreadyAte.lemon, 150, 600, 0.8);    
+    setIMG(pear, alreadyAte.pear, 350, 550, 0.9);    
+    setIMG(mushroom, alreadyAte.mushroom, 580, 80, 1.2);    
+    setIMG(fries, alreadyAte.fries, 650, 560, scaleDown);    
+    setIMG(fish, alreadyAte.fish, 470, 220, 0.6);
+        
 }
 
 function savePng() {
@@ -85,9 +93,7 @@ function keyPressed() {
             mouseX <= 80 &&
             mouseY >= 80 &&
             mouseY <= 220
-        ) {
-            iceCream.splice(0, 1);
-            image(iceCream[0], 100, 200, 40, 80);
+        ) {        
             alreadyAte.iceCream = true;
         }
 
@@ -97,9 +103,7 @@ function keyPressed() {
             mouseX <= 180 &&
             mouseY >= 230 &&
             mouseY <= 370
-        ) {
-            apple.splice(0, 1);
-            image(apple[0], 200, 350, 45, 50);
+        ) {          
             alreadyAte.apple = true;
         }
 
@@ -109,9 +113,7 @@ function keyPressed() {
             mouseX <= 280 &&
             mouseY >= -20 &&
             mouseY <= 120
-        ) {
-            coconut.splice(0, 1);
-            image(coconut[0], 300, 100, 45, 45);
+        ) {            
             alreadyAte.coconut = true;
         }
 
@@ -121,9 +123,7 @@ function keyPressed() {
             mouseX <= 480 &&
             mouseY >= 280 &&
             mouseY <= 420
-        ) {
-            soda.splice(0, 1);
-            image(soda[0], 500, 400, 30, 60);
+        ) {            
             alreadyAte.soda = true;
         }
 
@@ -133,9 +133,7 @@ function keyPressed() {
             mouseX <= 130 &&
             mouseY >= 480 &&
             mouseY <= 620
-        ) {
-            lemon.splice(0, 1);
-            image(lemon[0], 150, 600, 40, 50);
+        ) {           
             alreadyAte.lemon = true;
         }
 
@@ -145,9 +143,7 @@ function keyPressed() {
             mouseX <= 330 &&
             mouseY >= 430 &&
             mouseY <= 570
-        ) {
-            pear.splice(0, 1);
-            image(pear[0], 350, 550, 40, 60);
+        ) {            
             alreadyAte.pear = true;
         }
 
@@ -157,9 +153,7 @@ function keyPressed() {
             mouseX <= 560 &&
             mouseY >= -40 &&
             mouseY <= 100
-        ) {
-            mushroom.splice(0, 1);
-            image(mushroom[0], 580, 80, 40, 60);
+        ) {            
             alreadyAte.mushroom = true;
         }
 
@@ -169,9 +163,7 @@ function keyPressed() {
             mouseX <= 630 &&
             mouseY >= 440 &&
             mouseY <= 580
-        ) {
-            fries.splice(0, 1);
-            image(fries[0], 650, 560, 35, 60);
+        ) {            
             alreadyAte.fries = true;
         }
 
@@ -181,9 +173,7 @@ function keyPressed() {
             mouseX <= 450 &&
             mouseY >= 100 &&
             mouseY <= 240
-        ) {
-            fish.splice(0, 1);
-            image(fish[0], 470, 220, 60, 50);
+        ) {            
             alreadyAte.fish = true;
         }
     }
