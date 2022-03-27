@@ -44,7 +44,7 @@ function setup() {
  * @param {number} posY
  * @param {number} scale
  */
-const setIMG = (imgArr, alreadyAte,posX, posY, scale) => {
+const setIMG = (imgArr, alreadyAte, posX, posY, scale) => {
     if (!alreadyAte) {
         image(imgArr[0], posX, posY, imgArr[0].width * scale, imgArr[0].height * scale);
     } else {
@@ -70,6 +70,16 @@ function draw() {
     setIMG(mushroom, alreadyAte.mushroom, 580, 80, 1.2);    
     setIMG(fries, alreadyAte.fries, 650, 560, scaleDown);    
     setIMG(fish, alreadyAte.fish, 470, 220, 0.6);
+
+    let currentTime = int(millis() / 1000);
+    textSize(24);
+    fill(0, 75, 153);
+    text("TIME: " + currentTime, 30, 380);
+    if (alreadyAte.iceCream == true && alreadyAte.apple == true && alreadyAte.coconut == true && 
+      alreadyAte.soda == true && alreadyAte.lemon == true && alreadyAte.pear == true && alreadyAte.mushroom == true &&
+      alreadyAte.fries == true && alreadyAte.fish == true) {
+      currentTime.stop();
+    }
         
 }
 
