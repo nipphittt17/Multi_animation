@@ -12,6 +12,16 @@ let mushroom = [];
 let fries = [];
 let fish = [];
 let eat = false;
+
+let zoom = 10;
+let zoomOut = 2;
+let zoomIn = -5;
+let zoomSpeed;
+
+let startButton;
+let returnButton;
+// let start = false;
+let currentTime;
 // let x = 10;
 // let y = 170;
 
@@ -27,13 +37,12 @@ const alreadyAte = {
     fish: false,
 };
 
-
 function setup() {
     // put setup code here
-    createCanvas(800, 800);
+    canvas = createCanvas(800, 800);
     console.log("canvas is created");
-    // saveButton = createButton("Save PNG");
-    // saveButton.mousePressed(savePng);
+    saveButton = createButton("Save PNG");
+    saveButton.mousePressed(savePng);
     frameRate(20);
 }
 
@@ -45,12 +54,28 @@ function setup() {
  * @param {number} scale
  */
 const setIMG = (imgArr, alreadyAte, posX, posY, scale) => {
+    if (zoom > zoomOut) zoomSpeed = -2;
+    else if (zoom < zoomIn) zoomSpeed = 2;
+    zoom = zoom + zoomSpeed;
+
     if (!alreadyAte) {
-        image(imgArr[0], posX, posY, imgArr[0].width * scale, imgArr[0].height * scale);
+        image(
+            imgArr[0],
+            posX,
+            posY,
+            imgArr[0].width * scale + zoom,
+            imgArr[0].height * scale + zoom
+        );
     } else {
-        image(imgArr[1], posX, posY + (imgArr[0].height * scale - imgArr[1].height * scale), imgArr[1].width * scale, imgArr[1].height * scale);
+        image(
+            imgArr[1],
+            posX,
+            posY + (imgArr[0].height * scale - imgArr[1].height * scale),
+            imgArr[1].width * scale + zoom,
+            imgArr[1].height * scale + zoom
+        );
     }
-}
+};
 
 function draw() {
     // put drawing code here
@@ -59,39 +84,62 @@ function draw() {
     // imageMode(CENTER);
     background(213, 224, 242);
     let scaleDown = 0.6;
-    
+
     image(playerImages[frameCount % 7], mouseX, mouseY, 120, 170);
-    setIMG(iceCream, alreadyAte.iceCream, 100, 200, scaleDown);  
-    setIMG(apple, alreadyAte.apple, 200, 350, 0.9);    
+    setIMG(iceCream, alreadyAte.iceCream, 100, 200, scaleDown);
+    setIMG(apple, alreadyAte.apple, 200, 350, 0.9);
     setIMG(coconut, alreadyAte.coconut, 300, 100, scaleDown);
-    setIMG(soda, alreadyAte.soda, 500, 400, scaleDown);    
-    setIMG(lemon, alreadyAte.lemon, 150, 600, 0.8);    
-    setIMG(pear, alreadyAte.pear, 350, 550, 0.9);    
-    setIMG(mushroom, alreadyAte.mushroom, 580, 80, 1.2);    
-    setIMG(fries, alreadyAte.fries, 650, 560, scaleDown);    
+    setIMG(soda, alreadyAte.soda, 500, 400, scaleDown);
+    setIMG(lemon, alreadyAte.lemon, 150, 600, 0.8);
+    setIMG(pear, alreadyAte.pear, 350, 550, 0.9);
+    setIMG(mushroom, alreadyAte.mushroom, 580, 80, 1.2);
+    setIMG(fries, alreadyAte.fries, 650, 560, scaleDown);
     setIMG(fish, alreadyAte.fish, 470, 220, 0.6);
 
-    let currentTime = int(millis() / 1000);
+    image(startButton, 80, 680);
+    image(
+        returnButton,
+        190,
+        690,
+        returnButton.width * 0.8,
+        returnButton.height * 0.8
+    );
     textSize(24);
     fill(0, 75, 153);
-    text("TIME: " + currentTime, 30, 380);
-    if (alreadyAte.iceCream == true && alreadyAte.apple == true && alreadyAte.coconut == true && 
-      alreadyAte.soda == true && alreadyAte.lemon == true && alreadyAte.pear == true && alreadyAte.mushroom == true &&
-      alreadyAte.fries == true && alreadyAte.fish == true) {
-      currentTime.stop();
+    // currentTime = 0;
+    currentTime = int((millis() * 3) / 1000);
+    text("TIME: " + currentTime, 300, 740);
+    // startButton.mousePressed(start);
+
+    if (
+        alreadyAte.iceCream == true &&
+        alreadyAte.apple == true &&
+        alreadyAte.coconut == true &&
+        alreadyAte.soda == true &&
+        alreadyAte.lemon == true &&
+        alreadyAte.pear == true &&
+        alreadyAte.mushroom == true &&
+        alreadyAte.fries == true &&
+        alreadyAte.fish == true
+    ) {
+        currentTime.stop();
     }
-        
 }
+
+// function start() {
+//     currentTime = int((millis() * 3) / 1000);
+//     text("TIME: " + currentTime, 200, 740);
+// }
 
 function savePng() {
-    saveButton(canvas, "canvas.png");
+    save(canvas, "canvas.png");
 }
 
-function mouseClicked() {
-    if (mouseButton == RIGHT) {
-        isPause = !isPause;
-    }
-}
+// function mouseClicked() {
+//     if (mouseButton == RIGHT) {
+//         isPause = !isPause;
+//     }
+// }
 
 function keyPressed() {
     if (keyCode === 32) {
@@ -103,7 +151,7 @@ function keyPressed() {
             mouseX <= 80 &&
             mouseY >= 80 &&
             mouseY <= 220
-        ) {        
+        ) {
             alreadyAte.iceCream = true;
         }
 
@@ -113,7 +161,7 @@ function keyPressed() {
             mouseX <= 180 &&
             mouseY >= 230 &&
             mouseY <= 370
-        ) {          
+        ) {
             alreadyAte.apple = true;
         }
 
@@ -123,7 +171,7 @@ function keyPressed() {
             mouseX <= 280 &&
             mouseY >= -20 &&
             mouseY <= 120
-        ) {            
+        ) {
             alreadyAte.coconut = true;
         }
 
@@ -133,7 +181,7 @@ function keyPressed() {
             mouseX <= 480 &&
             mouseY >= 280 &&
             mouseY <= 420
-        ) {            
+        ) {
             alreadyAte.soda = true;
         }
 
@@ -143,7 +191,7 @@ function keyPressed() {
             mouseX <= 130 &&
             mouseY >= 480 &&
             mouseY <= 620
-        ) {           
+        ) {
             alreadyAte.lemon = true;
         }
 
@@ -153,7 +201,7 @@ function keyPressed() {
             mouseX <= 330 &&
             mouseY >= 430 &&
             mouseY <= 570
-        ) {            
+        ) {
             alreadyAte.pear = true;
         }
 
@@ -163,7 +211,7 @@ function keyPressed() {
             mouseX <= 560 &&
             mouseY >= -40 &&
             mouseY <= 100
-        ) {            
+        ) {
             alreadyAte.mushroom = true;
         }
 
@@ -173,7 +221,7 @@ function keyPressed() {
             mouseX <= 630 &&
             mouseY >= 440 &&
             mouseY <= 580
-        ) {            
+        ) {
             alreadyAte.fries = true;
         }
 
@@ -183,7 +231,7 @@ function keyPressed() {
             mouseX <= 450 &&
             mouseY >= 100 &&
             mouseY <= 240
-        ) {            
+        ) {
             alreadyAte.fish = true;
         }
     }
@@ -224,4 +272,7 @@ function preload() {
 
     fish.push(loadImage("data/fish/fish.png"));
     fish.push(loadImage("data/fish/fishBones.png"));
+
+    startButton = loadImage("data/button/buttonStart.png");
+    returnButton = loadImage("data/button/return.png");
 }
