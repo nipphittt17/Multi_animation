@@ -15,12 +15,25 @@ let eat = false;
 // let x = 10;
 // let y = 170;
 
+const alreadyAte = {
+    iceCream: false,
+    apple: false,
+    coconut: false,
+    soda: false,
+    lemon: false,
+    pear: false,
+    mushroom: false,
+    fries: false,
+    fish: false,
+};
+
+
 function setup() {
     // put setup code here
     createCanvas(800, 800);
     console.log("canvas is created");
-    saveButton = createButton("Save PNG");
-    saveButton.mousePressed(savePng);
+    // saveButton = createButton("Save PNG");
+    // saveButton.mousePressed(savePng);
     frameRate(10);
 }
 
@@ -65,9 +78,9 @@ function mouseClicked() {
 function keyPressed() {
     if (keyCode === 32) {
         //32=spacebar
-        eat = true;
+        // eat = true;
         if (
-            // eat &&
+            !alreadyAte.iceCream &&
             mouseX >= 20 &&
             mouseX <= 80 &&
             mouseY >= 80 &&
@@ -75,10 +88,11 @@ function keyPressed() {
         ) {
             iceCream.splice(0, 1);
             image(iceCream[0], 100, 200, 40, 80);
+            alreadyAte.iceCream = true;
         }
 
         if (
-            // eat &&
+            !alreadyAte.apple &&
             mouseX >= 120 &&
             mouseX <= 180 &&
             mouseY >= 230 &&
@@ -86,10 +100,11 @@ function keyPressed() {
         ) {
             apple.splice(0, 1);
             image(apple[0], 200, 350, 45, 50);
+            alreadyAte.apple = true;
         }
 
         if (
-            // eat &&
+            !alreadyAte.coconut &&
             mouseX >= 220 &&
             mouseX <= 280 &&
             mouseY >= -20 &&
@@ -97,10 +112,11 @@ function keyPressed() {
         ) {
             coconut.splice(0, 1);
             image(coconut[0], 300, 100, 45, 45);
+            alreadyAte.coconut = true;
         }
 
         if (
-            // eat &&
+            !alreadyAte.soda &&
             mouseX >= 420 &&
             mouseX <= 480 &&
             mouseY >= 280 &&
@@ -108,10 +124,11 @@ function keyPressed() {
         ) {
             soda.splice(0, 1);
             image(soda[0], 500, 400, 30, 60);
+            alreadyAte.soda = true;
         }
 
         if (
-            // eat &&
+            !alreadyAte.lemon &&
             mouseX >= 70 &&
             mouseX <= 130 &&
             mouseY >= 480 &&
@@ -119,10 +136,11 @@ function keyPressed() {
         ) {
             lemon.splice(0, 1);
             image(lemon[0], 150, 600, 40, 50);
+            alreadyAte.lemon = true;
         }
 
         if (
-            // eat &&
+            !alreadyAte.pear &&
             mouseX >= 270 &&
             mouseX <= 330 &&
             mouseY >= 430 &&
@@ -130,10 +148,11 @@ function keyPressed() {
         ) {
             pear.splice(0, 1);
             image(pear[0], 350, 550, 40, 60);
+            alreadyAte.pear = true;
         }
 
         if (
-            // eat &&
+            !alreadyAte.mushroom &&
             mouseX >= 500 &&
             mouseX <= 560 &&
             mouseY >= -40 &&
@@ -141,10 +160,11 @@ function keyPressed() {
         ) {
             mushroom.splice(0, 1);
             image(mushroom[0], 580, 80, 40, 60);
+            alreadyAte.mushroom = true;
         }
 
         if (
-            // eat &&
+            !alreadyAte.fries &&
             mouseX >= 570 &&
             mouseX <= 630 &&
             mouseY >= 440 &&
@@ -152,10 +172,11 @@ function keyPressed() {
         ) {
             fries.splice(0, 1);
             image(fries[0], 650, 560, 35, 60);
+            alreadyAte.fries = true;
         }
 
         if (
-            // eat &&
+            !alreadyAte.fish &&
             mouseX >= 390 &&
             mouseX <= 450 &&
             mouseY >= 100 &&
@@ -163,6 +184,7 @@ function keyPressed() {
         ) {
             fish.splice(0, 1);
             image(fish[0], 470, 220, 60, 50);
+            alreadyAte.fish = true;
         }
     }
 
