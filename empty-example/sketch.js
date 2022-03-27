@@ -7,6 +7,10 @@ let apple = [];
 let coconut = [];
 let soda = [];
 let lemon = [];
+let pear = [];
+let mushroom = [];
+let fries = [];
+let fish = [];
 let eat = false;
 // let x = 10;
 // let y = 170;
@@ -33,11 +37,10 @@ function draw() {
     image(coconut[0], 300, 100, 45, 45);
     image(soda[0], 500, 400, 30, 60);
     image(lemon[0], 150, 600, 40, 50);
-
-    // image(iceCream[0], 350, 550, 35, 70);
-    // image(iceCream[0], 580, 80, 35, 70);
-    // image(iceCream[0], 650, 160, 35, 70);
-    // image(iceCream[0], 670, 550, 35, 70);
+    image(pear[0], 350, 550, 40, 60);
+    image(mushroom[0], 580, 80, 40, 60);
+    image(fries[0], 650, 560, 35, 60);
+    image(fish[0], 470, 220, 60, 50);
     // image(iceCream[0], 570, 600, 35, 70);
 
     // image(apple, 400, 250);
@@ -117,6 +120,50 @@ function keyPressed() {
             lemon.splice(0, 1);
             image(lemon[0], 150, 600, 40, 50);
         }
+
+        if (
+            // eat &&
+            mouseX >= 270 &&
+            mouseX <= 330 &&
+            mouseY >= 430 &&
+            mouseY <= 570
+        ) {
+            pear.splice(0, 1);
+            image(pear[0], 350, 550, 40, 60);
+        }
+
+        if (
+            // eat &&
+            mouseX >= 500 &&
+            mouseX <= 560 &&
+            mouseY >= -40 &&
+            mouseY <= 100
+        ) {
+            mushroom.splice(0, 1);
+            image(mushroom[0], 580, 80, 40, 60);
+        }
+
+        if (
+            // eat &&
+            mouseX >= 570 &&
+            mouseX <= 630 &&
+            mouseY >= 440 &&
+            mouseY <= 580
+        ) {
+            fries.splice(0, 1);
+            image(fries[0], 650, 560, 35, 60);
+        }
+
+        if (
+            // eat &&
+            mouseX >= 390 &&
+            mouseX <= 450 &&
+            mouseY >= 100 &&
+            mouseY <= 240
+        ) {
+            fish.splice(0, 1);
+            image(fish[0], 470, 220, 60, 50);
+        }
     }
 
     if (keyCode === 39) {
@@ -143,4 +190,16 @@ function preload() {
 
     lemon.push(loadImage("data/lemon/lemon.png"));
     lemon.push(loadImage("data/lemon/lemonHalf.png"));
+
+    pear.push(loadImage("data/pear/pear.png"));
+    pear.push(loadImage("data/pear/pearHalf.png"));
+
+    mushroom.push(loadImage("data/mushroom/mushroom.png"));
+    mushroom.push(loadImage("data/mushroom/mushroomHalf.png"));
+
+    fries.push(loadImage("data/fries/fries.png"));
+    fries.push(loadImage("data/fries/friesEmpty.png"));
+
+    fish.push(loadImage("data/fish/fish.png"));
+    fish.push(loadImage("data/fish/fishBones.png"));
 }
