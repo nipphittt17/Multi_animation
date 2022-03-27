@@ -1,6 +1,13 @@
 let canvas;
-// let isPause = true;
+let isPause = false;
+let eat = false;
 let saveButton;
+
+let zoom = 10;
+let zoomSpeed;
+let zoomOut = 5;
+let zoomIn = -5;
+
 let playerImages = [];
 let iceCream = [];
 let apple = [];
@@ -11,13 +18,12 @@ let pear = [];
 let mushroom = [];
 let fries = [];
 let fish = [];
-let eat = false;
-// let x = 10;
-// let y = 170;
+
+let startButton;
+let currentTime = 0;
 
 function setup() {
-    // put setup code here
-    createCanvas(800, 800);
+    canvas = createCanvas(800, 800);
     console.log("canvas is created");
     saveButton = createButton("Save PNG");
     saveButton.mousePressed(savePng);
@@ -25,22 +31,36 @@ function setup() {
 }
 
 function draw() {
-    // put drawing code here
-
-    // if (!isPause) {
     // imageMode(CENTER);
     background(213, 224, 242);
     // ellipse(120, 220, 80, 80);
+
+    if (zoom > zoomOut) zoomSpeed = -2;
+    else if (zoom < zoomIn) zoomSpeed = 2;
+    zoom = zoom + zoomSpeed;
+
     image(playerImages[frameCount % 7], mouseX, mouseY, 120, 170);
-    image(iceCream[0], 100, 200, 40, 80);
-    image(apple[0], 200, 350, 45, 50);
-    image(coconut[0], 300, 100, 45, 45);
-    image(soda[0], 500, 400, 30, 60);
-    image(lemon[0], 150, 600, 40, 50);
-    image(pear[0], 350, 550, 40, 60);
-    image(mushroom[0], 580, 80, 40, 60);
-    image(fries[0], 650, 560, 35, 60);
-    image(fish[0], 470, 220, 60, 50);
+    image(iceCream[0], 100, 200, 40 + zoom, 80 + zoom);
+    image(apple[0], 200, 350, 45 + zoom, 50 + zoom);
+    image(coconut[0], 300, 100, 45 + zoom, 45 + zoom);
+    image(soda[0], 500, 400, 30 + zoom, 60 + zoom);
+    image(lemon[0], 150, 600, 40 + zoom, 50 + zoom);
+    image(pear[0], 350, 550, 40 + zoom, 60 + zoom);
+    image(mushroom[0], 580, 80, 40 + zoom, 60 + zoom);
+    image(fries[0], 650, 560, 35 + zoom, 60 + zoom);
+    image(fish[0], 470, 220, 60 + zoom, 50 + zoom);
+    if (isPause) {
+        image(playerImages[0], mouseX, mouseY, 120, 170);
+    }
+
+    image(startButton, 80, 680);
+    textSize(20);
+
+    // text("TIME: " + currentTime, 200, 730);
+    // if (startButton.mousePressed()) {
+    // }
+    // currentTime = int((millis() * 3) / 1000);
+    // text("TIME: " + currentTime, 200, 730);
     // image(iceCream[0], 570, 600, 35, 70);
 
     // image(apple, 400, 250);
@@ -49,17 +69,17 @@ function draw() {
     // if (eat && x >= 140) {
     //     iceCream.splice(0, 1);
     //     image(iceCream[0], 210, 250);
-    // }
 }
 
 function savePng() {
-    saveButton(canvas, "canvas.png");
+    save(canvas, "canvas.png");
 }
 
 function mouseClicked() {
     if (mouseButton == RIGHT) {
-        isPause = !isPause;
+        isPause = true;
     }
+    return false;
 }
 
 function keyPressed() {
@@ -202,4 +222,6 @@ function preload() {
 
     fish.push(loadImage("data/fish/fish.png"));
     fish.push(loadImage("data/fish/fishBones.png"));
+
+    startButton = loadImage("data/button/buttonStart.png");
 }
