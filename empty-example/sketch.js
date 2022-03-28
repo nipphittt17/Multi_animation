@@ -134,11 +134,11 @@ function draw() {
         if (currentTime <= 100) {
             text("Congratulations!!\nYou are a pro eater ", 260, 370);
         } else if (currentTime > 100 && currentTime < 500) {
-            text("Good job!\nKeep going ", 260, 370);
+            text("Good job!\nKeep eating ", 260, 370);
         } else if (currentTime > 500 && currentTime < 1000) {
-            text("Too slow!\nKeep going ", 260, 370);
+            text("Too slow!\nKeep eating ", 260, 370);
         } else {
-            text("Very bad\nKeep going ", 260, 370);
+            text("Very bad\nKeep eating ", 260, 370);
         }
         currentTime.pause();
     }
