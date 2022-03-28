@@ -1,5 +1,4 @@
 let canvas;
-// let isPause = true;
 let saveButton;
 let playerImages = [];
 let iceCream = [];
@@ -11,16 +10,15 @@ let pear = [];
 let mushroom = [];
 let fries = [];
 let fish = [];
-let eat = false;
 
 let zoom = 10;
-let zoomOut = 2;
+let zoomOut = 3;
 let zoomIn = -5;
 let zoomSpeed;
 
 let startButton;
 let returnButton;
-// let start = false;
+
 let currentTime;
 // let x = 10;
 // let y = 170;
@@ -104,11 +102,14 @@ function draw() {
         returnButton.width * 0.8,
         returnButton.height * 0.8
     );
+
     textSize(24);
+
     fill(0, 75, 153);
     // currentTime = 0;
     currentTime = int((millis() * 3) / 1000);
     text("TIME: " + currentTime, 300, 740);
+
     // startButton.mousePressed(start);
 
     if (
@@ -122,24 +123,21 @@ function draw() {
         alreadyAte.fries == true &&
         alreadyAte.fish == true
     ) {
-        currentTime.stop();
+        fill(255);
+        rect(200, 200, 400, 300, 20);
+        fill(0, 75, 153);
+        textSize(30);
+        text("Your score is " + (100 - currentTime) + "/100", 260, 330);
+        if (currentTime <= 20) {
+            text("Congratulations!!\nYou are a pro eater ", 260, 370);
+        }
+        currentTime.pause();
     }
 }
-
-// function start() {
-//     currentTime = int((millis() * 3) / 1000);
-//     text("TIME: " + currentTime, 200, 740);
-// }
 
 function savePng() {
     save(canvas, "canvas.png");
 }
-
-// function mouseClicked() {
-//     if (mouseButton == RIGHT) {
-//         isPause = !isPause;
-//     }
-// }
 
 function keyPressed() {
     if (keyCode === 32) {
@@ -237,7 +235,7 @@ function keyPressed() {
     }
 
     if (keyCode === 39) {
-        eat = false;
+        playerImages.pause();
     }
 }
 
