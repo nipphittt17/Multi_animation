@@ -114,7 +114,7 @@ function draw() {
 
     fill(0, 75, 153);
     console.log(currentTime);
-    text("TIME: " + currentTime, 300, 740);
+    text("TIME: " + currentTime, 200, 740);
 
     if (
         alreadyAte.iceCream == true &&
