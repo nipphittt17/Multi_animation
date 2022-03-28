@@ -19,13 +19,11 @@ let zoomSpeed;
 let startImg;
 let startButton;
 let alreadyStart = false;
-let returnButton;
 
 let currentTime = 0;
+
 let soundGame;
 let soundEat;
-// let x = 10;
-// let y = 170;
 
 const alreadyAte = {
     iceCream: false,
@@ -44,10 +42,9 @@ let currX = -1;
 let currY = -1;
 
 function setup() {
-    // put setup code here
-    backgroundMusic();
     canvas = createCanvas(800, 800);
     console.log("canvas is created");
+    backgroundMusic();
     saveButton = createButton("Save PNG");
     saveButton.mousePressed(savePng);
     frameRate(20);
@@ -91,10 +88,6 @@ const setIMG = (imgArr, alreadyAte, posX, posY, scale) => {
 };
 
 function draw() {
-    // put drawing code here
-
-    // if (!isPause) {
-    // imageMode(CENTER);
     background(213, 224, 242);
     let scaleDown = 0.6;
 
@@ -117,20 +110,10 @@ function draw() {
     startButton = new Button(80, 680, startImg);
     startButton.display();
 
-    image(
-        returnButton,
-        190,
-        690,
-        returnButton.width * 0.8,
-        returnButton.height * 0.8
-    );
-
     textSize(24);
-
     fill(0, 75, 153);
     console.log(currentTime);
-    text("TIME: " + currentTime, 300, 740);
-    // startButton.mousePressed(start);
+    text("TIME: " + currentTime, 200, 740);
 
     if (
         alreadyAte.iceCream == true &&
@@ -171,7 +154,6 @@ class Button {
     display() {
         if (this.over() || alreadyStart) {
             currentTime = currentTime + 1;
-            // currentTime = int((millis() * 3) / 1000);
             alreadyStart = true;
         } else currentTime = 0;
 
@@ -200,7 +182,6 @@ function savePng() {
 function keyPressed() {
     if (alreadyStart == true && keyCode === 32) {
         //32=spacebar
-        // eat = true;
         if (
             !alreadyAte.iceCream &&
             mouseX >= 20 &&
@@ -310,10 +291,6 @@ function keyPressed() {
             currX = mouseX;
             currY = mouseY;
         }
-    }
-
-    if (keyCode === 39) {
-        playerImages.pause();
     }
 }
 
