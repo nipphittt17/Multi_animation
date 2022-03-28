@@ -124,12 +124,18 @@ function draw() {
         alreadyAte.fish == true
     ) {
         fill(255);
-        rect(200, 200, 400, 300, 20);
+        rect(225, 250, 350, 200, 20);
         fill(0, 75, 153);
         textSize(30);
         text("Your score is " + (100 - currentTime) + "/100", 260, 330);
         if (currentTime <= 20) {
             text("Congratulations!!\nYou are a pro eater ", 260, 370);
+        } else if (currentTime > 20 && currentTime < 50) {
+            text("Good job!\nKeep going ", 260, 370);
+        } else if (currentTime > 50 && currentTime < 100) {
+            text("Too slow!\nKeep going ", 260, 370);
+        } else {
+            text("Very bad\nKeep going ", 260, 370);
         }
         currentTime.pause();
     }
