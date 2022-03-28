@@ -16,10 +16,12 @@ let zoomOut = 3;
 let zoomIn = -5;
 let zoomSpeed;
 
+let startImg;
 let startButton;
+let alreadyStart = false;
 let returnButton;
 
-let currentTime;
+let currentTime = 0;
 // let x = 10;
 // let y = 170;
 
@@ -94,7 +96,9 @@ function draw() {
     setIMG(fries, alreadyAte.fries, 650, 560, scaleDown);
     setIMG(fish, alreadyAte.fish, 470, 220, 0.6);
 
-    image(startButton, 80, 680);
+    startButton = new Button(80, 680, startImg);
+    startButton.display();
+
     image(
         returnButton,
         190,
@@ -106,10 +110,8 @@ function draw() {
     textSize(24);
 
     fill(0, 75, 153);
-    // currentTime = 0;
-    currentTime = int((millis() * 3) / 1000);
+    console.log(currentTime);
     text("TIME: " + currentTime, 300, 740);
-
     // startButton.mousePressed(start);
 
     if (
@@ -127,12 +129,12 @@ function draw() {
         rect(225, 250, 350, 200, 20);
         fill(0, 75, 153);
         textSize(30);
-        text("Your score is " + (100 - currentTime) + "/100", 260, 330);
-        if (currentTime <= 20) {
+        text("Your score is " + (1000 - currentTime), 260, 330);
+        if (currentTime <= 100) {
             text("Congratulations!!\nYou are a pro eater ", 260, 370);
-        } else if (currentTime > 20 && currentTime < 50) {
+        } else if (currentTime > 100 && currentTime < 500) {
             text("Good job!\nKeep going ", 260, 370);
-        } else if (currentTime > 50 && currentTime < 100) {
+        } else if (currentTime > 500 && currentTime < 1000) {
             text("Too slow!\nKeep going ", 260, 370);
         } else {
             text("Very bad\nKeep going ", 260, 370);
@@ -141,12 +143,44 @@ function draw() {
     }
 }
 
+class Button {
+    constructor(inX, inY, inImg) {
+        this.x = inX;
+        this.y = inY;
+        this.img = inImg;
+    }
+
+    display() {
+        if (this.over() || alreadyStart) {
+            currentTime = currentTime + 1;
+            // currentTime = int((millis() * 3) / 1000);
+            alreadyStart = true;
+        } else currentTime = 0;
+
+        image(this.img, this.x, this.y);
+    }
+
+    over() {
+        if (
+            mouseIsPressed === true &&
+            mouseX > this.x &&
+            mouseX < this.x + this.img.width &&
+            mouseY > this.y &&
+            mouseY < this.y + this.img.height
+        ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
 function savePng() {
     save(canvas, "canvas.png");
 }
 
 function keyPressed() {
-    if (keyCode === 32) {
+    if (alreadyStart == true && keyCode === 32) {
         //32=spacebar
         // eat = true;
         if (
@@ -232,7 +266,7 @@ function keyPressed() {
         if (
             !alreadyAte.fish &&
             mouseX >= 390 &&
-            mouseX <= 450 &&
+            mouseX <= 500 &&
             mouseY >= 100 &&
             mouseY <= 240
         ) {
@@ -277,6 +311,6 @@ function preload() {
     fish.push(loadImage("data/fish/fish.png"));
     fish.push(loadImage("data/fish/fishBones.png"));
 
-    startButton = loadImage("data/button/buttonStart.png");
+    startImg = loadImage("data/button/buttonStart.png");
     returnButton = loadImage("data/button/return.png");
 }
