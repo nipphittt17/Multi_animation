@@ -20,6 +20,8 @@ let startButton;
 let returnButton;
 
 let currentTime;
+let soundGame;
+let soundEat;
 // let x = 10;
 // let y = 170;
 
@@ -37,6 +39,7 @@ const alreadyAte = {
 
 function setup() {
     // put setup code here
+    backgroundMusic();
     canvas = createCanvas(800, 800);
     console.log("canvas is created");
     saveButton = createButton("Save PNG");
@@ -145,6 +148,11 @@ function savePng() {
     save(canvas, "canvas.png");
 }
 
+function backgroundMusic() {
+    soundGame.play();
+    soundGame.setVolume(0.3);
+}
+
 function keyPressed() {
     if (keyCode === 32) {
         //32=spacebar
@@ -157,6 +165,7 @@ function keyPressed() {
             mouseY <= 220
         ) {
             alreadyAte.iceCream = true;
+            soundEat.play();
         }
 
         if (
@@ -167,6 +176,7 @@ function keyPressed() {
             mouseY <= 370
         ) {
             alreadyAte.apple = true;
+            soundEat.play();
         }
 
         if (
@@ -177,6 +187,7 @@ function keyPressed() {
             mouseY <= 120
         ) {
             alreadyAte.coconut = true;
+            soundEat.play();
         }
 
         if (
@@ -187,6 +198,7 @@ function keyPressed() {
             mouseY <= 420
         ) {
             alreadyAte.soda = true;
+            soundEat.play();
         }
 
         if (
@@ -197,6 +209,7 @@ function keyPressed() {
             mouseY <= 620
         ) {
             alreadyAte.lemon = true;
+            soundEat.play();
         }
 
         if (
@@ -207,6 +220,7 @@ function keyPressed() {
             mouseY <= 570
         ) {
             alreadyAte.pear = true;
+            soundEat.play();
         }
 
         if (
@@ -217,6 +231,7 @@ function keyPressed() {
             mouseY <= 100
         ) {
             alreadyAte.mushroom = true;
+            soundEat.play();
         }
 
         if (
@@ -227,6 +242,7 @@ function keyPressed() {
             mouseY <= 580
         ) {
             alreadyAte.fries = true;
+            soundEat.play();
         }
 
         if (
@@ -237,6 +253,7 @@ function keyPressed() {
             mouseY <= 240
         ) {
             alreadyAte.fish = true;
+            soundEat.play();
         }
     }
 
@@ -246,6 +263,11 @@ function keyPressed() {
 }
 
 function preload() {
+    soundGame = loadSound(
+        "data/sound/Sound_game_super_mario_bros_soundtrack.mp3"
+    );
+    soundEat = loadSound("data/sound/Sound_eat.mp3");
+
     for (let i = 1; i < 8; i++) {
         playerImages.push(loadImage("data/png/Run (" + i + ").png"));
     }
