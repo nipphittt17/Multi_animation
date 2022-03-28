@@ -22,6 +22,8 @@ let alreadyStart = false;
 let returnButton;
 
 let currentTime = 0;
+let soundGame;
+let soundEat;
 // let x = 10;
 // let y = 170;
 
@@ -43,11 +45,18 @@ let currY = -1;
 
 function setup() {
     // put setup code here
+    backgroundMusic();
     canvas = createCanvas(800, 800);
     console.log("canvas is created");
     saveButton = createButton("Save PNG");
     saveButton.mousePressed(savePng);
     frameRate(20);
+}
+
+function backgroundMusic() {
+    soundGame.play();
+    soundGame.setVolume(0.3);
+    userStartAudio();
 }
 
 /**
@@ -90,12 +99,11 @@ function draw() {
     let scaleDown = 0.6;
 
     if (alreadyStart) {
-      if (!sIsPressed) image(playerImages[frameCount % 7], mouseX, mouseY, 120, 170);
-      else image(playerImages[frameCount % 7], currX, currY, 120, 170);
-    }
-    else image(playerImages[frameCount % 7], 20, 20, 120, 170);
+        if (!sIsPressed)
+            image(playerImages[frameCount % 7], mouseX, mouseY, 120, 170);
+        else image(playerImages[frameCount % 7], currX, currY, 120, 170);
+    } else image(playerImages[frameCount % 7], 20, 20, 120, 170);
 
-  
     setIMG(iceCream, alreadyAte.iceCream, 100, 200, scaleDown);
     setIMG(apple, alreadyAte.apple, 200, 350, 0.9);
     setIMG(coconut, alreadyAte.coconut, 300, 100, scaleDown);
@@ -201,6 +209,7 @@ function keyPressed() {
             mouseY <= 220
         ) {
             alreadyAte.iceCream = true;
+            soundEat.play();
         }
 
         if (
@@ -211,6 +220,7 @@ function keyPressed() {
             mouseY <= 370
         ) {
             alreadyAte.apple = true;
+            soundEat.play();
         }
 
         if (
@@ -221,6 +231,7 @@ function keyPressed() {
             mouseY <= 120
         ) {
             alreadyAte.coconut = true;
+            soundEat.play();
         }
 
         if (
@@ -231,6 +242,7 @@ function keyPressed() {
             mouseY <= 420
         ) {
             alreadyAte.soda = true;
+            soundEat.play();
         }
 
         if (
@@ -241,6 +253,7 @@ function keyPressed() {
             mouseY <= 620
         ) {
             alreadyAte.lemon = true;
+            soundEat.play();
         }
 
         if (
@@ -251,6 +264,7 @@ function keyPressed() {
             mouseY <= 570
         ) {
             alreadyAte.pear = true;
+            soundEat.play();
         }
 
         if (
@@ -261,6 +275,7 @@ function keyPressed() {
             mouseY <= 100
         ) {
             alreadyAte.mushroom = true;
+            soundEat.play();
         }
 
         if (
@@ -271,6 +286,7 @@ function keyPressed() {
             mouseY <= 580
         ) {
             alreadyAte.fries = true;
+            soundEat.play();
         }
 
         if (
@@ -281,27 +297,32 @@ function keyPressed() {
             mouseY <= 240
         ) {
             alreadyAte.fish = true;
+            soundEat.play();
         }
     }
 
     if (keyCode === 83) {
-      // sIsPressed = sIsPressed ? false : true;
-      if (sIsPressed) {
-        sIsPressed = false;
-      } else {
-        sIsPressed = true;
-        currX = mouseX;
-        currY = mouseY;
-      }
+        // sIsPressed = sIsPressed ? false : true;
+        if (sIsPressed) {
+            sIsPressed = false;
+        } else {
+            sIsPressed = true;
+            currX = mouseX;
+            currY = mouseY;
+        }
     }
 
     if (keyCode === 39) {
         playerImages.pause();
     }
-
 }
 
 function preload() {
+    soundGame = loadSound(
+        "data/sound/Sound_game_super_mario_bros_soundtrack.mp3"
+    );
+    soundEat = loadSound("data/sound/Sound_eat.mp3");
+
     for (let i = 1; i < 8; i++) {
         playerImages.push(loadImage("data/png/Run (" + i + ").png"));
     }
