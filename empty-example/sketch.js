@@ -171,7 +171,7 @@ class Button {
         }
     }
 
-    //ref: https://www.youtube.com/watch?v=YLIJLWZ-QB8&t=2s
+    //reference: https://www.youtube.com/watch?v=YLIJLWZ-QB8&t=2s
 }
 
 function backgroundMusic() {
@@ -288,6 +288,7 @@ function keyPressed() {
     }
 
     if (keyCode === 83) {
+        //83 = 'S'
         // sIsPressed = sIsPressed ? false : true;
         if (sIsPressed) {
             sIsPressed = false;
