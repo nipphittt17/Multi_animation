@@ -91,6 +91,7 @@ function draw() {
     background(213, 224, 242);
     let scaleDown = 0.6;
 
+    console.log(frameCount);
     if (alreadyStart) {
         if (!sIsPressed)
             image(playerImages[frameCount % 7], mouseX, mouseY, 120, 170);
@@ -292,10 +293,6 @@ function keyPressed() {
             currX = mouseX;
             currY = mouseY;
         }
-    }
-
-    if (keyCode === 39) {
-        playerImages.pause();
     }
 }
 
