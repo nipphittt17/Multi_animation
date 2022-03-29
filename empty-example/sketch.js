@@ -62,6 +62,7 @@ function backgroundMusic() {
  * @param {number} posX
  * @param {number} posY
  * @param {number} scale
+ * @reference https://p5js.org/reference/#/p5/image
  */
 const setIMG = (imgArr, alreadyAte, posX, posY, scale) => {
     if (zoom > zoomOut) zoomSpeed = -2;
