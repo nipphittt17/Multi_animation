@@ -127,6 +127,8 @@ function draw() {
         rect(225, 250, 350, 200, 20);
         fill(0, 75, 153);
         textSize(30);
+
+        // Ref Time: https://youtu.be/klSOBa_WDB0
         text("Your score is " + (1000 - currentTime), 260, 330);
         if (currentTime <= 100) {
             text("Congratulations!!\nYou are a pro eater ", 260, 370);
@@ -175,6 +177,7 @@ class Button {
 }
 
 function backgroundMusic() {
+    // Ref: https://youtu.be/uHNgkQsHLXQ
     soundGame.play();
     soundGame.setVolume(0.3);
     userStartAudio();
@@ -301,9 +304,11 @@ function keyPressed() {
 }
 
 function preload() {
+    // Ref sound game: https://youtu.be/_9bB7r0M9kg
     soundGame = loadSound(
         "data/sound/Sound_game_super_mario_bros_soundtrack.mp3"
     );
+    // Ref sound eat: https://youtu.be/6CbsgSeqP_g
     soundEat = loadSound("data/sound/Sound_eat.mp3");
 
     for (let i = 1; i < 8; i++) {
