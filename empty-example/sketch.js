@@ -50,12 +50,6 @@ function setup() {
     frameRate(20);
 }
 
-function backgroundMusic() {
-    soundGame.play();
-    soundGame.setVolume(0.3);
-    userStartAudio();
-}
-
 /**
  * @param {Array} imgArr
  * @param {boolean} alreadyAte
@@ -175,6 +169,14 @@ class Button {
             return false;
         }
     }
+
+    //ref: https://www.youtube.com/watch?v=YLIJLWZ-QB8&t=2s
+}
+
+function backgroundMusic() {
+    soundGame.play();
+    soundGame.setVolume(0.3);
+    userStartAudio();
 }
 
 function savePng() {
